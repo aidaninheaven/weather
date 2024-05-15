@@ -2,43 +2,28 @@
 #include <string>
 #include <fstream>
 
-void juneStats(int& juneRain, int& juneSun, int& juneCloud);
-void julyStats(int& julyRain, int& julySun, int& julyCloud);
-void augStats (int& augRain, int& augSun, int& augCloud);
+using namespace std;
 
-//void totalStats (int& totalRain,int& totalSun, int& totalCloud);
-
-//void readFile 
-//void printData
+void readFile (ifstream& weatherFile, char monthDays [3][30]); 
+void countDays (char monthDays [3][30]);
 
 int main() {
+
+char monthDays [3][30];
+
+ifstream weatherFile ("RainOrShine.txt");
+
+return 0;
+
+} 
+void readFile (ifstream& weatherFile, char monthDays [3][30]);
+
+int column = 0;
+int row = 0;
+
+char forecast;
+
+while (myFile >> weather) {
     
-    int juneRain = 0 
-    int juneSun = 0
-    int juneCloud = 0 
     
-    int julyRain = 0
-    int julySun = 0
-    int julyCloud = 0
-    
-    int augRain = 0
-    int augSun = 0
-    int augCloud = 0
-    
-   // int totalRain = 0
-   // int totalSun = 0 
-   // int totalCloud = 0 
-   
-    return 0;
 }
-
-//void juneStats(int& juneRain, int& juneSun, int& juneCloud);
-
-//void julyStats(int& julyRain = 0, int& julySun, int& julyCloud);
-
-//void augStats(int& augRain = 0, int& augSun, int& augCloud);
-
-
-
-
-//void totalStats (int& totalRain,int& totalSun, int& totalCloud);
