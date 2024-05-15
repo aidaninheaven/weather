@@ -25,5 +25,9 @@ char forecast;
 
 while (myFile >> weather) {
     
+    if [weather = 'R', weather = 'S', weather = 'C'] {
+        
+        monthDays[row][column++] = forecast;
+    }
     
 }
