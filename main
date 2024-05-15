@@ -7,16 +7,21 @@ using namespace std;
 void readFile (ifstream& weatherFile, char monthDays [3][30]); 
 void countDays (char monthDays [3][30]);
 
+
 int main() {
 
 char monthDays [3][30];
 
 ifstream weatherFile ("RainOrShine.txt");
 
+readFile(weatherFile, monthDays [3][30])
+
 return 0;
 
 } 
-void readFile (ifstream& weatherFile, char monthDays [3][30]);
+
+
+void readFile (ifstream& weatherFile, char monthDays [3][30]) {
 
 int column = 0;
 int row = 0;
@@ -28,6 +33,15 @@ while (myFile >> weather) {
     if [weather = 'R', weather = 'S', weather = 'C'] {
         
         monthDays[row][column++] = forecast;
+        
+        if (column <= 30) {
+            column = 0;
+            row++;
+        }
+        
+        if (row >= 3) {
+            break;
+            }
+        }
     }
-    
 }
