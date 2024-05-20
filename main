@@ -2,46 +2,155 @@
 #include <string>
 #include <fstream>
 
+
+// Making all of these counters global so I don't have to reference them all
+int counter = 0;
+
+int totalRain = 0;
+int totalSun = 0;
+int totalCloud = 0;
+
+int juneRain;
+int juneSun;
+int juneCloud;
+
+int julyRain;
+int julySun;
+int julyCloud;
+
+int augRain;
+int augSun;
+int augCloud;
+
 using namespace std;
 
-void readFile (ifstream& weatherFile, char monthDays [3][30]); 
-void countDays (char monthDays [3][30]);
+// Declaring functions
+void readFile(ifstream& weatherFile, string& data, string days[3][30], string& weather);
+void countDays(string days[3][30]);
+void report();
+void conditionals();
+
+int main () {
+
+// Declaring variables that I reference elsewhere
+    string days[3][30];
+
+    // Getting RainOrShine.txt into the program
+    ifstream weatherFile; weatherFile.open("RainOrShine.txt");
+    string weather;
+    string data;
+
+    // Calling the functions
+    readFile(weatherFile, data, days, weather);
+    countDays(days);
+    report();
+    conditionals();
+
+    return 0;
+}
+
+void readFile(ifstream& weatherFile, string& data, string days[3][30], string& weather) {
+    // Stores the data from the file in a string
+    while (weatherFile >> weather) {
+        data = data + weather;
+    }
+
+    // Converts the string into an array
+        for (int column = 0; column < 3; column++) {
+            for (int row = 0; row < 30; row++) {
+
+                days[column][row] = data[counter];
+                counter++;
 
 
-int main() {
-
-char monthDays [3][30];
-
-ifstream weatherFile ("RainOrShine.txt");
-
-readFile(weatherFile, monthDays [3][30])
-
-return 0;
-
-} 
-
-
-void readFile (ifstream& weatherFile, char monthDays [3][30]) {
-
-int column = 0;
-int row = 0;
-
-char forecast;
-
-while (myFile >> weather) {
-    
-    if [weather = 'R', weather = 'S', weather = 'C'] {
-        
-        monthDays[row][column++] = forecast;
-        
-        if (column <= 30) {
-            column = 0;
-            row++;
-        }
-        
-        if (row >= 3) {
-            break;
             }
+
         }
+
+    days[3][30] = data[counter];
+}
+
+
+void countDays(string days[3][30]) {
+
+// Adds to the month's count for rainy sunny and cloudy days
+    for (int juneCheck = 0; juneCheck < 30; juneCheck++) {
+        if (days[0][juneCheck] == "S") {
+            juneSun++;
+        }
+        else if (days[0][juneCheck] == "R") {
+            juneRain++;
+        }
+        else if (days[0][juneCheck] == "C") {
+            juneCloud++;
+        }
+    }
+
+    for (int julyCheck = 0; julyCheck< 30; julyCheck++) {
+        if (days[1][julyCheck] == "S") {
+            julySun++;
+        }
+        else if (days[1][julyCheck] == "R") {
+            julyRain++;
+        }
+        else if (days[1][julyCheck] == "C") {
+            julyCloud++;
+        }
+    }
+
+    for (int augCheck = 0; augCheck < 30; augCheck++) {
+        if (days[2][augCheck] == "S") {
+            augSun++;
+        }
+        else if (days[2][augCheck] == "R") {
+            augRain++;
+        }
+        else if (days[2][augCheck] == "C") {
+            augCloud++;
+        }
+    }
+
+    // Adding up the number of days for the total count
+    totalCloud = juneCloud + julyCloud + augCloud;
+    totalRain = juneRain + julyRain + augRain;
+    totalSun = juneSun + julySun + augSun;
+
+
+}
+
+void report() {
+
+// Printing data
+    cout << "June had " << juneSun << " sunny days, " << juneCloud << " cloudy days, and " << juneRain << " rainy days." << endl;
+    cout << "July had " << julySun << " sunny days, " << julyCloud << " cloudy days, and " << julyRain << " rainy days." << endl;
+    cout << "August had " << augSun << " sunny days, " << augCloud << " cloudy days, and " << augRain << " rainy days." << endl;
+
+    cout << "In total, there were " << totalSun << " sunny days, " << totalCloud << " cloudy days, and " << totalRain << " rainy days.";
+
+}
+
+void conditionals() {
+
+// Conditionals for every possibility for which month has the most rainy days
+    if (juneRain > julyRain && juneRain > augRain) {
+        cout << endl << "June had the highest number of rainy days." << endl;
+    }
+    else if (julyRain > juneRain && julyRain > augRain) {
+        cout << endl << "July had the highest number of rainy days." << endl;
+    }
+    else if (augRain > juneRain && augRain > julyRain) {
+        cout << endl << "August had the highest number of rainy days." << endl;
+    }
+    else if (juneRain == julyRain && juneRain > augRain) {
+        cout << endl << "June and July were tied for highest number of rainy days." << endl;
+    }
+    else if (juneRain == augRain && juneRain > julyRain) {
+        cout << endl << "June and August were tied for highest number of rainy days." << endl;
+    }
+    else if (julyRain == augRain && julyRain > juneRain) {
+        cout << endl << "July and August were tied for highest number of rainy days." << endl;
+    }
+    else if (juneRain == julyRain && juneRain == augRain) {
+        cout << endl << "all months tied for the number of rainy days.";
     }
 }
